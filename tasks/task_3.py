@@ -2,6 +2,7 @@ from functools import wraps
 
 
 def validate_positive(func):
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         all_args = list(args) + list(kwargs.values())
