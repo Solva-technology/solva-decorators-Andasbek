@@ -11,4 +11,5 @@ def log(func):
         res = func(*args, **kwargs)
         print(f"Результат: {res}")
         return res
+
     return wrapper
