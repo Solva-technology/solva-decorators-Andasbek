@@ -2,7 +2,6 @@ from functools import wraps
 
 
 def log(func):
-    
     @wraps(func)
     def wrapper(*args, **kwargs):
         args_str = [str(i) for i in args]
