@@ -1,20 +1,19 @@
-# ЗАДАНИЕ 1: Логирование вызова функции
-# Напиши декоратор log, который:
-# - печатает имя вызываемой функции и переданные ей аргументы,
-# - затем вызывает оригинальную функцию,
-# - после этого печатает возвращённый результат.
-# Пример:
-# >>> @log
-# >>> def add(a, b): return a + b
-# >>> add(2, 3)
-# Вывод:
-# Вызов: add(2, 3)
-# Результат: 5
-
 from functools import wraps
+
 
 def log(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        pass
+        if not args and not kwargs:
+            all_args = "без аргументов"
+        else:
+            args_str = [repr(i) for i in args]
+            kwargs_str = sorted([f"{k}={v!r}" for k, v in kwargs.items()])
+            all_args = ", ".join(args_str + kwargs_str)
+
+        print(f"Вызов: {func.__name__}({all_args})")
+        res = func(*args, **kwargs)
+        print(f"Результат: {res}")
+        return res
+
     return wrapper
