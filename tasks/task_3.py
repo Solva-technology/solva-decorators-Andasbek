@@ -5,8 +5,10 @@ def validate_positive(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         all_args = list(args) + list(kwargs.values())
-        for i in all_args:
-            if i < 0:
+        for key in all_args:
+            if key <= 0:
                 raise ValueError("Все аргументы должны быть положительными")
-        return func(*args, *kwargs)
+            if not isinstance(key, (int, float)):
+                raise TypeError("Все аргументы должны быть числовыми")
+        return func(*args, **kwargs)
     return wrapper
